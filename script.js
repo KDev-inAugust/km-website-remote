@@ -8,11 +8,11 @@ const refDateMilliseconds = refDate.getTime();
 const moonimage = document.getElementById("moonimage");
 	
 var curDate = new Date ()
-var month = curDate.getMonth();
-var day = curDate.getDay();
-var hours = curDate.getHours();
-var mins = curDate.getMinutes();
-var secs = curDate.getSeconds();
+//var month = curDate.getMonth();
+//var day = curDate.getDay();
+//var hours = curDate.getHours();
+//var mins = curDate.getMinutes();
+//var secs = curDate.getSeconds();
 
 //find differenec between current date and referance date
 const refDateDif = (curDate-refDate);
@@ -53,8 +53,11 @@ if (curPhase <= 1) {
     var x = 8 + ' New Moon'
 };
 
-	
-document.getElementById("mpoutput").innerHTML = (curDate + "<br>" + x);
+setInterval(function timeUpdate(){
+	var runSecs = new Date ();
+	document.getElementById("mpoutput").innerHTML = (runSecs + "<br>" + x);
+}, 1000);
+
 	
 	switch (x) {
 		case 1 + ' New Moon': 
@@ -82,6 +85,8 @@ document.getElementById("mpoutput").innerHTML = (curDate + "<br>" + x);
 			moonimage.innerHTML="<img src=\'images/wanecrescent.png\' height='200px'>";
 			break;
 	};
+
+	
 	
 //Jan 2 1:33pm was the first new moon in January 2022
 //29.53 Days = 2551392000 Milliseconds
