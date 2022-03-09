@@ -1,6 +1,5 @@
 const h2 = document.createElement("h2");
 h2.textContent = "This content added by JavaScript";
-
 document.querySelector("body").appendChild(h2);
 	
 const refDate = new Date("1/2/2022 13:33:00")
@@ -8,11 +7,11 @@ const refDateMilliseconds = refDate.getTime();
 const moonimage = document.getElementById("moonimage");
 	
 var curDate = new Date ()
-//var month = curDate.getMonth();
-//var day = curDate.getDay();
-//var hours = curDate.getHours();
-//var mins = curDate.getMinutes();
-//var secs = curDate.getSeconds();
+var month = curDate.getMonth();
+var day = curDate.getDay();
+var hours = curDate.getHours();
+var mins = curDate.getMinutes();
+var secs = curDate.getSeconds();
 
 //find differenec between current date and referance date
 const refDateDif = (curDate-refDate);
@@ -55,10 +54,18 @@ if (curPhase <= 1) {
 
 setInterval(function timeUpdate(){
 	var runSecs = new Date ();
-	document.getElementById("mpoutput").innerHTML = (runSecs + "<br>" + x);
+	const liveYear = runSecs.getFullYear();
+	const liveMonth = runSecs.getMonth();
+	const liveDay = runSecs.getDay();
+	const liveHours = runSecs.getHours();
+	const liveMins = runSecs.getMinutes();
+	const liveSecs = runSecs.getSeconds();
+	document.getElementById("mpoutput").innerHTML = (`${liveMonth + 1 }` + "/" + `${liveDay}` +"/"+ `${liveYear}` + " " + "<br>" + liveSecs + " seconds" + "<br>" + x);
 }, 1000);
 
+function daysToNextPhase (curphase, curDate){
 	
+}	
 	switch (x) {
 		case 1 + ' New Moon': 
 			moonimage.innerHTML="<img src=\'images/newmoon.png\' height='200px'>";
