@@ -20,18 +20,31 @@ const refDateDif = (curDate-refDate);
 //divide by one phase length in milliseconds and convert to days
 
 const phase = 318924000;
+const dayMilli = 86400000;
+const moonCycle = 2551392000;
 
-var curPhase = (refDateDif/phase);
+let curPhase = (refDateDif/phase);
+let daysElapMath = (refDateDif/dayMilli);
+let phasenumber = 0;
 
-//var reduct1_8 = (curPhase/8);
-var phasenumber = 0;
+
 
 //below is for when the date is far enought away that reduct1_8 start returning math that is larger than 8
 while (curPhase > 8) {
     curPhase=curPhase%8; 
 }
+function daysRemain (){
+	while (daysElapMath>29.53){
+	daysElapMath=daysElapMath/29.53;
+	}
+}
 
-	
+daysRemain();
+let daysTill=2.75 - daysElapMath;
+daysTill = daysTill.toFixed(2);
+
+
+
 if (curPhase <= 1) {
     var x = 1 + ' New Moon'
 } else if (curPhase > 1 && curPhase<= 1.99){
@@ -56,17 +69,22 @@ setInterval(function timeUpdate(){
 	var runSecs = new Date ();
 	const liveYear = runSecs.getFullYear();
 	const liveMonth = runSecs.getMonth();
-	const liveDay = runSecs.getDay();
+	const liveDay = runSecs.getDate();
 	const liveHours = runSecs.getHours();
 	const liveMins = runSecs.getMinutes();
 	const liveSecs = runSecs.getSeconds();
-	document.getElementById("mpoutput").innerHTML = (`${liveMonth + 1 }` + "/" + `${liveDay}` +"/"+ `${liveYear}` + " " + "<br>" + liveSecs + " seconds" + "<br>" + x);
+	document.getElementById("mpoutput").innerHTML = (`${liveMonth + 1 }` + "/" + `${liveDay}` +"/"+ `${liveYear}` + " " + "<br>" 
+	+ liveHours + ":" + liveMins + ":" + liveSecs + "<br>" + "Phase " + x + "<br>"
+	);
 }, 1000);
 
-function daysToNextPhase (curphase, curDate){
-	
+function daysToNextPhase (){
+	const ttnph = (daysTill);
+	document.getElementById("mpoutput2").innerHTML=(ttnph + " Days until next phase")
 }	
-	switch (x) {
+daysToNextPhase();
+
+switch (x) {
 		case 1 + ' New Moon': 
 			moonimage.innerHTML="<img src=\'images/newmoon.png\' height='200px'>";
 			break;
@@ -98,4 +116,4 @@ function daysToNextPhase (curphase, curDate){
 //Jan 2 1:33pm was the first new moon in January 2022
 //29.53 Days = 2551392000 Milliseconds
 //divide that by 8 and you get 318924000 milliseeconddss
-
+//milliseconds in a day = 86400000
