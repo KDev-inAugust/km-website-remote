@@ -25,6 +25,7 @@ const moonCycle = 2551392000;
 
 let curPhase = (refDateDif/phase);
 let daysElapMath = (refDateDif/dayMilli);
+//above converts time form ref date into days by diving by a day in milliseconds
 let phasenumber = 0;
 
 
@@ -33,16 +34,26 @@ let phasenumber = 0;
 while (curPhase > 8) {
     curPhase=curPhase%8; 
 }
-function daysRemain (){
+
+//below is math that calculates the days remaining until the next phase
+setInterval(function daysRemain (){
 	while (daysElapMath>29.53){
+		//take total number of days since refenace date (a new moon)
 	daysElapMath=daysElapMath/29.53;
+	//divide by number of cycles
+	daysElapMath=daysElapMath%1;
+	//howmany days into current cycle are we (find remainder of whole integer)
+	daysElapMath=daysElapMath*29.53;
+	//multiply that by a whole cycle to fine how far into current cycle we are from new moon
+	daysElapMath=daysElapMath%3.69;
+	//find out how much remians after diving by a whole phase to see how far into this phase we are
+	daysElapMath=3.69-daysElapMath;
+	//get difference between how far in this phase we are and a full phase wchi will get less over the course of the phase
+	daysTill=daysElapMath.toFixed(2);
+	//limit to two decimal points
+	document.getElementById("mpoutput2").innerHTML=(daysTill + " Days until next phase")
 	}
-}
-
-daysRemain();
-let daysTill=2.75 - daysElapMath;
-daysTill = daysTill.toFixed(2);
-
+},1000);
 
 
 if (curPhase <= 1) {
@@ -78,11 +89,6 @@ setInterval(function timeUpdate(){
 	);
 }, 1000);
 
-function daysToNextPhase (){
-	const ttnph = (daysTill);
-	document.getElementById("mpoutput2").innerHTML=(ttnph + " Days until next phase")
-}	
-daysToNextPhase();
 
 switch (x) {
 		case 1 + ' New Moon': 
