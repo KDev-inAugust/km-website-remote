@@ -1,6 +1,6 @@
-const h2 = document.createElement("h2");
+/*const h2 = document.createElement("h2");
 h2.textContent = "This content added by JavaScript";
-document.querySelector("body").appendChild(h2);
+document.querySelector("body").appendChild(h2);*/
 	
 const refDate = new Date("1/2/2022 13:33:00")
 const refDateMilliseconds = refDate.getTime();
